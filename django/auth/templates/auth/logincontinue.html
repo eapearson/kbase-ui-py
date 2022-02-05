@@ -1,0 +1,144 @@
+{% extends "base.html" %} {% block content %} {% comment %}
+<h1>Login Continue</h1>
+{% endcomment %} {% comment %}
+<p>Status: {{ status }}</p>
+{% endcomment %}
+
+<div id="LoginContinue" />
+<script>
+  class SimpleElement {
+    constructor(tagName = "div") {
+      this.element = document.createElement(tagName);
+    }
+
+    text(someText) {
+      this.element.innerText = someText;
+      return this;
+    }
+
+    append(...els) {
+      for (const el of els) {
+        this.element.appendChild(el.element);
+      }
+      return this;
+    }
+
+    style(name, value) {
+      this.element.style[name] = value;
+      return this;
+    }
+
+    class(...classNames) {
+      this.element.classList.add(...classNames);
+      return this;
+    }
+
+    attachTo(node) {
+      node.appendChild(this.element);
+      return this;
+    }
+  }
+
+  function div(...els) {
+    const el = new SimpleElement("div");
+    if (els.length) {
+      el.append(...els);
+    }
+    return el;
+  }
+
+  function span(...els) {
+    const el = new SimpleElement("span");
+    if (els.length) {
+      el.append(...els);
+    }
+    return el;
+  }
+
+  function element(tagName) {
+    return document.createElement(tagName);
+  }
+
+  function loading(message) {
+    const container = document.getElementById("LoginContinue");
+    const loadingEl = div(
+      span()
+        .class("fas", "fa-fan", "fa-spin", "fa-2x")
+        .style("margin-right", "10px")
+        .style("color", "rgba(200, 200, 200, 1"),
+      span().text(message)
+    )
+      .style("border", "1px solid silver")
+      .style("border-radius", "8px")
+      .style("background-color", "rgba(200, 200, 200, 0.2)")
+      .style("padding", "10px")
+      .style("margin", "3em auto")
+      .style("max-width", "10em")
+      .style("display", "flex")
+      .style("flex-direction", "row")
+      .style("justify-content", "center")
+      .style("align-items", "center")
+      .attachTo(container);
+    return loadingEl;
+  }
+
+  async function main() {
+    const loader = loading("Logging in...");
+    const response = await fetch(
+      "{{ settings.service_base_url }}/services/auth/login/choice",
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+        },
+      }
+    );
+    const choice = await response.json();
+
+    // TODO: determine if came from signup process, if so redirect to
+    // the signup continuation page.
+
+    // TODO: evaluate policies, see if there are new ones the user needs to
+    // agree to.
+
+    // TODO: depending on the provider, may need to pause here to confirm
+    // the signin attempt.
+
+    // TODO: handle choice.login length
+
+    const params = {
+      id: choice.login[0].id,
+      linkall: false,
+      policyids: [],
+    };
+    const pickResponse = await fetch(
+      "{{ settings.service_base_url }}/services/auth/login/pick",
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(params),
+      }
+    );
+    const pickData = await pickResponse.json();
+
+    // TODO: handle various stats of login pick.
+
+    const token = pickData.token.token;
+
+    const maxAge = 60 * 60 * 24 * 7 * 2;
+    document.cookie = `kbase_session=${token}; path=/; max-age=${maxAge}`;
+
+    // TODO: continue to the original destination
+
+    document.location.href = "{{ settings.ui_base_url }}/dashboard";
+  }
+
+  main();
+</script>
+
+{% endblock content %}

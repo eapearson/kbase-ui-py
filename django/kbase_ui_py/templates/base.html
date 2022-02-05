@@ -1,0 +1,40 @@
+{% load static %}
+{% load bootstrap4 %}
+
+<html>
+<head>
+    <title>{{ page.title }} | KBase</title>
+    <title>KBase</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="{% static 'kbase_ui_py/styles.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'kbase_ui_py/bootstrap-custom.css' %}">
+    <!-- reference your installed Font Awesome Free package's files here -->
+    <script src="{% static 'fontawesome_free/js/all.min.js' %}"></script>
+    <!-- reference your installed Font Awesome Free package's files here -->
+    <link href="{% static 'fontawesome_free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    {# Load CSS and JavaScript #}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+</head>
+<body class="KBaseUI">
+<div class="Main">
+    <div class="Header">
+        {% include "header.html" %}
+    </div>
+    <div class="Body">
+        <div class="Sidebar">
+            {% include "sidebar.html" %}
+        </div>
+        <div class="Content">
+            <!-- {% include "alerts.html" %}-->
+
+                {% block content %}{% endblock %}
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+

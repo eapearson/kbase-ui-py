@@ -1,0 +1,196 @@
+{% extends "base.html" %}
+{% load markdownify %}
+
+{% block content %}
+
+    <div class="GridRow" style="margin: 0 10px;">
+        <div class="GridColumn" style="min-width: 5em; max-width: 20em; margin-right: 1em;">
+
+
+            <div class="GridColumn-content">
+
+                <div>
+                    <div style="text-align: center; font-weight: bold;">
+                        {{ profile.user.realname }}
+                    </div>
+
+                    <div style="text-align: center; font-family: monospace;">
+                        {{ profile.user.username }}
+                    </div>
+
+                    <img alt="avatar"
+                         style="width: 100%; margin: 8px 0px;"
+                         src="https://www.gravatar.com/avatar/{{ profile.profile.synced.gravatarHash }}?s=300&r=pg&d=identicon"/>
+                </div>
+
+                {% if profile.profile.userdata.jobTitle %}
+
+                    {% if profile.profile.userdata.jobTitle == "Other" %}
+                        <div class="SubSection">
+                            <div>
+                                position
+                            </div>
+                            <div>
+                                {{ profile.profile.userdata.jobTitleOther }}
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="SubSection">
+                            <div>
+                                position
+                            </div>
+                            <div>
+                                {{ profile.profile.userdata.jobTitle }}
+                            </div>
+                        </div>
+                    {% endif %}
+
+                {% endif %}
+
+                {% if profile.profile.userdata.organization %}
+                    <div class="SubSection">
+                        <div>
+                            organization
+                        </div>
+                        <div>
+                            {{ profile.profile.userdata.organization }}
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if location %}
+                    <div class="SubSection">
+                        <div>
+                            location
+                        </div>
+                        <div>
+                            {{ location }}
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if profile.profile.userdata.fundingSource %}
+                    <div class="SubSection">
+                        <div>
+                            primary funding source
+                        </div>
+                        <div>
+                            {{ profile.profile.userdata.fundingSource }}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+
+
+        </div>
+        <div class="GridColumn -fullwidth">
+            <div class="GridRow" style="margin-bottom: 20px;">
+                <div class="GridColumn -fullwidth" style="margin-right: 1em;">
+                    <div class="Section" style="margin-bottom: 2em;">
+                        <div>Research Interests</div>
+                        <div>
+                            {% if profile.profile.userdata.researchInterests %}
+                                {% for interest in profile.profile.userdata.researchInterests %}
+                                    {% if interest == "Other" %}
+                                        {{ profile.profile.userdata.researchInterestsOther }}
+                                    {% else %}
+                                        {{ interest }}
+                                    {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                <div style="font-style: italic; text-align: center;">No research interests</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="Section">
+                        <div>Research or Personal Statement</div>
+                        <div >
+                            {% if profile.profile.userdata.researchStatement %}
+                                {{ profile.profile.userdata.researchStatement|markdownify }}
+                            {% else %}
+                                <div style="font-style: italic; text-align: center;">No statement</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="GridColumn -fullwidth">
+                    <div class="Section">
+                        <div>Organizations</div>
+                        <div style="border: 1px solid silver; padding: 10px; margin-top: 10px;">
+                            <p style="font-style: italic;">Current disabled - orgs is too slow for what we want to show.</p>
+                            <p style="font-style: italic;">In order to filter groups by the target user, we need to use the 
+                                singular group endpoint - once for each group. If you (the viewer)
+                                are a member of many groups, it may take several seconds to load the 
+                                orgs.
+                            </p>
+                            <p style="font-style: italic;">
+                                We need to update the groups service to allow for filtering by membership 
+                                of an arbitrary user.
+                            </p>
+                            {% if organizations %}
+                                {% for org in organizations %}
+                                    <div>
+                                        <a href="/organizations/{{ org.id }}" target="_blank">{{ org.name }}</a>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <div style="font-style: italic; text-align: center;">No organizations in common</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="GridRow">
+                <div class="GridColumn -fullwidth" style="flex: 2 1 0px">
+                    <div class="Section">
+                        <div>Affiliations</div>
+                        <div>
+                            {% if profile.profile.userdata.affiliations %}
+
+                                <table class="SimpleTable">
+
+                                    <thead>
+                                    <tr>
+                                        <th style="width: 25%;">position</th>
+                                        <th>organization</th>
+                                        <th style="width: 20%;">tenure</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                    {% for affiliation in profile.profile.userdata.affiliations %}
+
+                                        <tr>
+                                            <td>
+                                                {{ affiliation.title }}
+                                            </td>
+                                            <td>
+                                                {{ affiliation.organization }}
+                                            </td>
+                                            <td>
+                                                {{ affiliation.started }} -
+                                                {% if affiliation.ended %}
+                                                    {{ affiliation.ended }}
+                                                {% else %}
+                                                    present
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+
+                                    {% endfor %}
+
+                                    </tbody>
+
+                                </table>
+                            {% else %}
+                                <div style="font-style: italic; text-align: center;">No Affiliations</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

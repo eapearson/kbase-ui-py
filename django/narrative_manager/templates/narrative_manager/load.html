@@ -1,0 +1,107 @@
+{% extends "base.html" %} {% block content %}
+
+<div id="loader"></div>
+<script>
+  const TRIES = 10;
+  const BREATHING_ROOM = 1000;
+  async function checkNarrative(narrativeId, tries) {
+    if (tries === 0) {
+      return null;
+    }
+    const narrativeURL = document.location.origin + "/narrative/" + narrativeId;
+    const checkURL =
+      document.location.origin +
+      "/narrative/static/kbase/config/config.json?check=true";
+
+    try {
+      // TODO: timeout!
+      const response = await fetch(checkURL);
+      console.log("resp", response.status);
+
+      switch (response.status) {
+        case 200:
+          // For /narrative/ checks, there is no 201 or 401, so we
+          // have to grok the state of a "successful" response from
+          // the content.
+          // If there is no auth cookie, set_proxy will redirect
+          // to #login, but that will merely provide the stub index
+          // page. This is our '401' signal.
+          // If the response was the creation of a new session,
+          // a different redirect is issued -- the one which normally
+          // brings a user here! This response should either be
+          // successful or a 502. If successful, the response will
+          // be the config file, and we know that it is both a json
+          // file (and parsable) and will have some "well known"
+          // properties.
+
+          try {
+            const config = JSON.parse(await response.text());
+            console.log("config", config);
+            if (config && config.version) {
+              return narrativeURL;
+            } else {
+              throw new LoadingError(
+                "Error in Narrative check response",
+                "check"
+              );
+            }
+          } catch (ex) {
+            // This is our fake '401'
+            console.log("error", ex);
+            throw new UnauthenticatedError();
+          }
+          break;
+        case 201:
+          // For check_narrative, this is the response which means
+          // that a session has been created.
+          return narrativeURL;
+        case 502:
+          // On the next request, though, we pass through to
+          // the Jupyter server, which will not be ready for some
+          // period of time, and this will trigger a 502 in the
+          // nginx proxy layer.
+          return narrativeURL;
+        default:
+          throw new LoadingHttpError(
+            xhr.status,
+            xhr.statusText,
+            xhr.responseText
+          );
+      }
+      const retry = await response.text();
+      console.log("retry", retry, checkURL);
+      if (!retry) {
+        return narrativeURL;
+      }
+      await new Promise((resolve) => {
+        window.setTimeout(() => {
+          resolve();
+        }, BREATHING_ROOM);
+      });
+      checkNarrative(narrativeId, tries - 1);
+    } catch (ex) {
+      return null;
+    }
+  }
+  async function main() {
+    console.log("here");
+    const url = new URL(document.URL);
+    const query = new URLSearchParams(url.search);
+    const narrativeId = parseInt(query.get("n"), 10);
+    const check = query.get("check") === "true";
+    console.log("loader", narrativeId, check);
+    if (check) {
+      const narrativeURL = await checkNarrative(narrativeId, TRIES);
+
+      if (narrativeURL) {
+        //console.log("GOT IT!", narrativeURL);
+        window.location.href = narrativeURL;
+      } else {
+        console.log("BOO");
+      }
+    }
+  }
+  main();
+</script>
+
+{% endblock content %}

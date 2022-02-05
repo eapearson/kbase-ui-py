@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% include "./menu.html" %}
+
+<div style="flex: 1 1 0">
+    <table class="table table-lined table-hover table-scrollable">
+
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Url
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    {% for module in modules %}
+
+    <tr>
+        <td>
+            {{ module.module_name }}
+        </td>
+        <td>
+            <a href="{{ module.git_url }}" tareget="_blank">
+                {{ module.git_url }}
+            </a>
+        </td>
+    </tr>
+
+    {% endfor %}
+
+    </tbody>
+</table>
+
+{% endblock content %}

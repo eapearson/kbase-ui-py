@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'catalog/style.css' %}">
+
+{% include "./menu.html" %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm">
+            <p>
+                Welcome to the App Catalog!
+            </p>
+            <p>
+                Here you may browse and search <a href="/catalog/apps">apps</a>, <a href="/catalog/modules">modules</a>, workspace types.
+            </p>
+        </div>
+        <div class="col-sm">
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

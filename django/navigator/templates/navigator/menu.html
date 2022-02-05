@@ -1,0 +1,18 @@
+{% load if_starts_with %}
+<div class="Menu">
+    <div class="-item {% if request.path == '/navigator'%}-active{% endif %}"> 
+        <a href="/navigator">Home</a>
+    </div>
+    <div class="-item {% if_starts_with request.path '/navigator/yours' '-active' %}"> 
+        <a href="/navigator/yours">Your Narratives ({{ totals.own }})</a>
+    </div>
+    <div class="-item {% if_starts_with request.path '/navigator/shared' '-active' %}">
+        <a href="/navigator/shared">Shared With Me ({{ totals.shared }})</a>
+    </div>
+    <div class="-item {% if_starts_with request.path '/navigator/tutorial' '-active' %}">
+        <a href="/navigator/tutorial">Tutorials ({{ totals.tutorial }})</a>
+    </div>
+    <div class="-item {% if_starts_with request.path '/navigator/public' '-active' %}">
+        <a href="/navigator/public">Public ({{ totals.public }})</a>
+    </div>
+</div>

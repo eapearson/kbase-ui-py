@@ -1,0 +1,24 @@
+{% load nice_date %}
+<div class="KB-Row Object-summary" style="align-items: center;">
+    <div class="KB-Col -icon">
+        <span class="fa-stack fa-2x" style="font-size: 130%;">
+            <span class="fas fa-circle fa-stack-2x" style="height: unset; width: unset;"></span>
+            <span class="fas fa-bars fa-inverse fa-stack-1x" style="font-size: 140%;"></span>
+        </span>
+    </div>
+    <div class="KB-Col -title-area">
+        <div class="-title">
+            {{ object_info.name }}
+        </div>
+        <div class="-subtitle">
+            {{ object_info.type }}
+        </div>
+    </div>
+    <div class="-save-info">
+        Saved {{ workspace_info.modified_at|nice_date }} by <a href="{{ settings.ui_base_url }}/user_profile/{{ workspace_info.owner }}" target="_blank">{{ workspace_info.owner }}</a>
+    </div>
+    <div class="-buttons">
+        <button class="btn btn-outline-secondary">Copy</button>
+        <button class="btn btn-outline-secondary">JSON View</button>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'navigator/styles.css' %}">
+
+{% include "./menu.html" %}
+
+<div class="Navigator OverflowFriendlyCol">
+    <div class="OverflowFriendlyRow">
+        <div class="OverflowFriendlyCol" style="flex: 1 1 0">
+            {% include "./narratives.html" %}
+        </div>
+        <div class="OverflowFriendlyCol" style="flex: 1.5 1 0">
+            {% if selected_narrative %}
+                {% with narrative=selected_narrative %}
+                    <div class="OverflowFriendlyCol" style="border: 1px solid silver; padding: 10px; border-radius: 4px; box-shadow: 4 4 4;">
+                        {% include "./narrative.html" %}
+                    </div>
+                {% endwith %}
+            {% else %}
+                <div  class="OverflowFriendlyCol" style="border: 1px solid silver; padding: 10px; border-radius: 4px; box-shadow: 4 4 4;">
+                    <p>Click on a Narrative to the left to view it here
+                 </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

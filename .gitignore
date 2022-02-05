@@ -1,0 +1,16 @@
+# Python 
+
+# virtual environment locations
+/venv/
+
+__pycache__
+*.pyc
+
+node_modules
+
+# macOS
+.DS_Store
+ 
+# IDEs
+.idea
+.vscode

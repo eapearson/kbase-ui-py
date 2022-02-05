@@ -1,0 +1,52 @@
+{% extends "base.html" %} 
+
+{% block content %}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8">
+      {% include "./your_narratives.html" %}
+
+      <br />
+
+      {% include "./shared_narratives.html" %}
+    </div>
+
+    <div class="col col-md-4">
+        <div class="card">
+                <h5 class="card-header" style="text-align: center;">TODO</h2>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        ✓ Show most recent own narratives
+                    </li>
+                    <li class="list-group-item">
+                        ✓ Show most recent shared
+                    </li>
+                    <li class="list-group-item">
+                        ☐ Show most recent public
+                    </li>
+                    <li class="list-group-item">
+                        ☐ Show button to create narrative
+                    </li>
+                    <li class="list-group-item">
+                        ☐ Show searchable list of users
+                    </li>
+                    <li class="list-group-item">
+                        ☐ List of most recent apps
+                    </li>
+                    <li class="list-group-item">
+                        ☐ Show new feeds notifications
+                    </li>
+                    <li class="list-group-item">
+                        ☐ Auto refresh
+                    </li>
+                    <li class="list-group-item">
+                        ☐ Etc
+                    </li>
+                </ul>
+            </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

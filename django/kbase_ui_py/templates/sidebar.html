@@ -1,0 +1,114 @@
+{% load if_starts_with %}
+<div class="SidebarMenu">
+  {% if kbase.is_authenticated %}
+  <a
+    class="-button {% if_starts_with request.path '/dashboard' '-active' %} {% if request.path == '' %}-active{% endif %}"
+    href="/dashboard"
+    data-toggle="tooltip"
+    data-placement="right"
+    data="Dashboard - insight into your KBase activity"
+  >
+    <div class="fas fa-2x fa-tachometer-alt"></div>
+    <div>Dashboard</div>
+  </a>
+  {% endif %} {% if kbase.is_authenticated %}
+  <a
+    class="-button {% if_starts_with request.path '/navigator' '-active' %}"
+    href="/navigator"
+    data-toggle="tooltip"
+    data-placement="right"
+    data="Narrative Navigator - browse and search Narratives"
+  >
+    <div class="fas fa-2x fa-compass"></div>
+    <div>Navigator</div>
+  </a>
+  {% endif %} {% if kbase.is_authenticated %}
+  <a
+    class="-button {% if_starts_with request.path '/orgs' '-active' %}"
+    href="/orgs"
+    data-k-b-testhook-button="organizations"
+    data-toggle="tooltip"
+    data-placement="right"
+    title="Browse, search, join and manage KBase Organizations"
+  >
+    <div class="fas fa-2x fa-users"></div>
+    <div>Orgs</div>
+  </a>
+  {% endif %}
+  <a
+    class="-button {% if_starts_with request.path '/catalog' '-active' %}"
+    href="/catalog"
+    data-k-b-testhook-element="menu-item"
+    data-toggle="tooltip"
+    data-placement="right"
+    title="Browse and search a catalog of KBase Narrative Apps and Workspace Types"
+  >
+    <div class="fas fa-2x fa-book"></div>
+    <div>Catalog</div>
+  </a>
+  {% if kbase.is_authenticated %}
+  <a
+    class="-button {% if_starts_with request.path '/search' '-active' %}"
+    href="/search"
+    data-k-b-testhook-element="menu-item"
+    data-toggle="tooltip"
+    data-placement="right"
+    title="Search KBase data objects in Narratives and Reference Workspaces"
+  >
+    <div class="fas fa-2x fa-search"></div>
+    <div>Search</div>
+  </a>
+  <a
+    class="-button {% if_starts_with request.path '/jobs' '-active' %}"
+    href="/jobs"
+    data-k-b-testhook-element="menu-item"
+    data-toggle="tooltip"
+    data-placement="right"
+    title="Browse and manage jobs spawned in your Narratives"
+  >
+    <div class="fas fa-2x fa-suitcase"></div>
+    <div>Jobs</div>
+  </a>
+  <a
+    class="-button {% if_starts_with request.path '/account' '-active' %}"
+    href="/account"
+    data-k-b-testhook-element="menu-item"
+    data-toggle="tooltip"
+    data-placement="right"
+    title="Manage your KBase Account"
+  >
+    <div class="fas fa-2x fa-id-card"></div>
+    <div>Account</div>
+  </a>
+  <a
+    class="-button {% if_starts_with request.path '/feeds' '-active' %}"
+    href="/feeds"
+    data-k-b-testhook-element="menu-item"
+    data-toggle="tooltip"
+    data-placement="right"
+    title="Browse and manage notifications from your KBase Feeds"
+    style="position: relative"
+  >
+    <div class="fas fa-2x fa-bullhorn"></div>
+    <div>Feeds</div>
+    <div style="position: absolute; top: 0px; right: 0px">
+      <div
+        style="
+          width: 1.5em;
+          height: 1.5em;
+          padding: 4px;
+          color: white;
+          background-color: rgba(255, 0, 0, 0.8);
+          text-align: center;
+          border-radius: 0.75em;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        "
+      >
+        <span>2</span>
+      </div>
+    </div>
+    {% endif %}
+  </a>
+</div>

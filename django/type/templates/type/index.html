@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'type/styles.css' %}">
+
+<div class="KB-Type">
+
+    <div class="KB-Type-Summary">
+        <div class="-name">
+        {{ type.name }}
+        </div>
+        <div class="KB-LabeledField">
+            <div class="-label">version</div>
+            <div class="-value">{{ type.version.major }}.{{ type.version.minor }}</div>
+        </div>
+        <div class="KB-LabeledField">
+            <div class="-label"> 
+                module
+            </div>
+            <div class="-value">
+                {{ type.module }}
+            </div>
+        </div>
+    </div>
+
+    <div class="-menu">
+        {% include "./partials/type/menu.html" %}
+    </div>
+
+    <div class="-body">
+        {% if tab == "home" %}
+
+        {% include "./partials/type/home.html" %}
+
+        {% elif tab == "spec" %}
+
+        {% include "./partials/type/spec.html" %}
+
+        {% elif tab == "types-using" %}
+
+        {% include "./partials/type/types-using.html" %}
+
+        {% elif tab == "types-used" %}
+
+        {% include "./partials/type/types-used.html" %}
+
+        {% elif tab == "versions" %}
+
+        {% include "./partials/type/versions.html" %}
+
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}

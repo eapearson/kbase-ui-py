@@ -1,0 +1,11 @@
+{% load epoch_to_datetime %}
+{% if selected_group.resources.catalogmethod|length == 0 %}
+    <div class="KB-MissingData">no apps :(</div>
+{% else %}
+    {% for app in selected_group.resources.catalogmethod %}
+    <div class="-app KB-Box">
+        <div class="-name"><a href="{{ settings.service_base_url }}/catalog/app/{{ app.rid }}" target="_blank">{{ app.rid }}</a></div>
+        <div class="-date-added">added {% if app.added %}{{ app.added|epoch_to_datetime|date:"M j, Y" }}{% else %}n/a{% endif %}</div>
+    </div>
+    {% endfor %}
+{% endif %}

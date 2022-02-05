@@ -1,0 +1,19 @@
+{% load if_starts_with %}
+{% load if_matches %}
+<div class="Menu">
+    <div class="-item {% if tab == 'index' %}-active{% endif %}"> 
+        <a href="/object/{{object_info.ref}}">Home</a>
+    </div>
+    <div class="-item {% if tab == 'overview' %}-active{% endif %}"> 
+        <a href="/object/{{ object_info.ref }}/overview">Overview</a>
+    </div>
+    <div class="-item {% if tab == 'provenance' %}-active{% endif %}"> 
+        <a href="/object/{{ object_info.ref }}/provenance">Provenance</a>
+    </div>
+    <div class="-item {% if tab == 'related-data' %}-active{% endif %}"> 
+        <a href="/object/{{ object_info.ref }}/related-data">Related Data</a>
+    </div>
+    <div class="-item {% if tab == 'linked-samples' %}-active{% endif %}"> 
+        <a href="/object/{{ object_info.ref }}/linked-samples">Linked Samples</a>
+    </div>
+</div>

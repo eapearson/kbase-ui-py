@@ -1,0 +1,114 @@
+{% load nice_date %}
+<table class="table KB-DataTable">
+  <tbody>
+    <tr>
+      <th>Name</th>
+      <td>{{ type.name }}</td>
+    </tr>
+    <tr>
+      <th>Version</th>
+      <td>{{ type.version.major }}.{{ type.version.minor}}</td>
+    </tr>
+    <tr>
+      <th>Module</th>
+      <td>{{ type.module }}</td>
+    </tr>
+    <tr>
+      <th>In module version(s)</th>
+      <td>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Version Id</th>
+              <th>Created On</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for version in type_info.module_vers %}
+            <tr>
+              <td>
+                <a
+                  href="{{ settings.ui_base_url }}/type/module/{{ type.module }}/{{ version }}"
+                  target="_blank"
+                  >{{ version }}</a
+                >
+              </td>
+              <td>{{ version|nice_date }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Type Spec</h2>
+
+<table class="table KB-DataTable">
+  <tbody>
+    <tr>
+      <th>ID</th>
+      <td>{{ type_info.type_def }}</td>
+    </tr>
+    <tr>
+      <th>Description</th>
+      <td>{{ type_info.description }}</td>
+    </tr>
+    <tr>
+      <th>Spec</th>
+      <td>
+        <pre>{{ type_info.spec_def }}</pre>
+      </td>
+    </tr>
+    <tr>
+      <th>JSON Schema</th>
+      <td>
+        <pre>{{ type_info.json_schema }}</pre>
+      </td>
+    </tr>
+    <tr>
+      <th>Module Versions</th>
+      <td>
+        <pre>{{ type_info.module_vers }}</pre>
+      </td>
+    </tr>
+
+    <tr>
+      <th>Released Module Versions</th>
+      <td>
+        <pre>{{ type_info.released_module_vers }}</pre>
+      </td>
+    </tr>
+    <tr>
+      <th>Type Versions</th>
+      <td>
+        <pre>{{ type_info.type_vers }}</pre>
+      </td>
+    </tr>
+    <tr>
+      <th>REleased Type Versions</th>
+      <td>
+        <pre>{{ type_info.released_type_vers }}</pre>
+      </td>
+    </tr>
+    <tr>
+      <th>Using FUnc Defs</th>
+      <td>
+        <pre>{{ type_info.using_func_defs }}</pre>
+      </td>
+    </tr>
+    <tr>
+      <th>Using Type Defs</th>
+      <td>
+        <pre>{{ type_info.using_type_defs }}</pre>
+      </td>
+    </tr>
+    <tr>
+      <th>Used Type Defs</th>
+      <td>
+        <pre>{{ type_info.used_type_defs }}</pre>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,128 @@
+{% extends "base.html" %} 
+{% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'auth/styles.css' %}" />
+
+<div class="Login" style="display: none;" id="login-ui">
+    <div class="-header">
+      <div class="-row">
+        <img
+          src="{% static 'auth/images/kbase-logo-99.png' %}"
+          style="height: 50px"
+        />
+        <h1>Welcome to KBase</h1>
+      </div>
+      <div class="-row">
+        <p class="-subtitle">
+          A collaborative, open environment for systems biology of plants,
+          microbes and their communities
+        </p>
+      </div>
+    </div>
+    <div class="-body">
+        <div class="Well" style="display: flex; flex-direction: col">
+            <div class="-col">
+                <div class="-title-row">
+                    <span class="fas fa-sign-in-alt fa-2x" style="margin-right: 10px"></span>
+                    <span data-k-b-testhook-label="signin">Sign In with ...</span>
+                </div>
+                <div class="-body-row">
+                    <form action="{{ login_start_url }}" class="form" method="POST">
+                        <input type="hidden" name="redirecturl" value="{{ settings.ui_base_url }}/auth/loginstart">
+                        <input type="hidden" name="provider" value="google" />
+                        <button class="Login-button" type="submit">
+                            <img src="{% static 'auth/images/buttons/google/normal.png' %}" />
+                        </button>
+                    </form>
+                </div>
+                <div class="-body-row">
+                    <form action="{{ login_start_url }}" class="form" method="POST">
+                        <input type="hidden" name="redirecturl" value="{{ settings.ui_base_url }}/auth/loginstart">
+                        <input type="hidden" name="provider" value="orcid" />
+                        <button class="Login-button" type="submit">
+                            <img
+                            src="{% static 'auth/images/buttons/orcid/normal.png' %}"
+                            />
+                        </button>
+                    </form>
+                </div>
+                <div class="-body-row">
+                    <form action="{{ login_start_url }}" class="form" method="POST">
+                        <input type="hidden" name="redirecturl" value="{{ settings.ui_base_url }}/auth/loginstart">
+                        <input type="hidden" name="provider" value="globus" />
+                        <button class="Login-button" type="submit">
+                            <img
+                            src="{% static 'auth/images/buttons/globus/normal.png' %}"
+                            />
+                        </button>
+                    </form>
+                </div>
+                <div class="-body-row">
+                {% comment %} <form action="{{ login_start_url }}" class="form" method="POST">
+                    <input type="hidden" name="redirecturl" value="{{ settings.ui_base_url }}/auth/loginstart">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <label for="provider">Provider</label> 
+                        </div>
+                        <div class="col-auto">
+                            <select class="form-control" name="provider">
+                                <option value="google">Google</option>
+                                <option value="orcid">Orcid</option>
+                                <option value="globus">Globus</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col" style="margin-top: 6px;">
+                            <button class="btn btn-primary" type="submit">Sign In</button>
+                        </div>
+                    </div>
+                </form> {% endcomment %}
+                </div>
+            </div>
+            <div class="-col">
+                <div class="-title-row">
+                    <span class="far fa-user fa-2x" style="margin-right: 10px"></span>
+                    <span>New to KBase?</span>
+                </div>
+                <div class="-body-row">
+                    <button class="btn btn-secondary" style="margin-top: 10px; width: 180px">
+                        <div style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+                            <span class="fas fa-user-plus fa-2x" style="margin-right: 10px;"></span>
+                            <span> Sign Up</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="-footer">
+        <a href="https://www.kbase.us/support" target="_blank">Need Help?</a>
+    </div>
+  </div>
+</div>
+
+<script>
+
+async function main() {
+
+    const hash = window.location.hash;
+    console.log('hash', hash);
+
+    switch (hash) {
+        case '#auth2/login/continue':
+            // handoff from auth service login start process
+            // TODO: it would be really nice if the redirecturl mechanism
+            // worked. Did we disable it for some reason (security)?
+            document.location.href = '/auth/logincontinue'
+            return;
+    }
+
+    document.getElementById('login-ui').style.display = 'block';
+}
+
+main();
+
+</script>
+
+{% endblock content %}

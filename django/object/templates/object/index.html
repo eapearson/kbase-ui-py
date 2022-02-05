@@ -1,0 +1,50 @@
+{% extends "base.html" %} {% load static %} {% load nice_date %} {% block
+content %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'object/styles.css' %}"
+/>
+
+{% include "./partials/header.html" %}
+
+<div class="-menu">{% include "./partials/menu.html" %}</div>
+
+<table class="table KB-DataTable">
+  <tbody>
+    <tr>
+      <th>Type</th>
+      <td>
+        <a
+          href="{{ settings.ui_base_url }}/type/{{ object_info.type }}"
+          target="_blank"
+          >{{ object_info.type_info.name}}</a
+        >
+      </td>
+    </tr>
+    <tr>
+      <th>In Narrative</th>
+      <td>
+        <a
+          href="{{ settings.ui_base_url }}/narrative{{ object_info.wsid }}"
+          target="_blank"
+          >{{ workspace_info.metadata.narrative_nice_name }}</a
+        >
+      </td>
+    </tr>
+    <tr>
+      <th>Last Updated</th>
+      <td>{{ workspace_info.modified_at|nice_date}}</td>
+    </tr>
+    <tr>
+      <th>Permalink</th>
+      <td>
+        <a href="{{ settings.ui_base_url }}/object/{{ object_info.ref}}"
+          >{{ object_info.ref}}</a
+        >
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+{% endblock content %}

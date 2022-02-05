@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load nice_date %}
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'type/styles.css' %}">
+
+<div class="KB-Module">
+
+    <div class="KB-Module-Summary">
+        <div class="-name">
+        {{ module_name }}
+        </div>
+        <div class="KB-LabeledField">
+            <div class="-label">version</div>
+            <div class="-value">{{ module_info.ver }}</div>
+        </div>
+        <div class="KB-LabeledField">
+            <div class="-label">
+                released?
+            </div>
+            <div class="-value">
+                {% if module_info.released %}Yes{% else %}No{% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="-menu">
+        {% include "./partials/module/menu.html" %}
+    </div>
+
+
+    <div class="-body">
+    {% if tab == "home" %}
+
+    {% include "./partials/module/home.html" %}
+
+    {% elif tab == "spec" %}
+
+    {% include "./partials/module/spec.html" %}
+
+    {% elif tab == "types" %}
+
+    {% include "./partials/module/types.html" %}
+
+    {% elif tab == "included-modules" %}
+
+    {% include "./partials/module/included-modules.html" %}
+
+    {% elif tab == "versions" %}
+
+    {% include "./partials/module/versions.html" %}
+
+    {% endif %}
+    </div>
+</div>
+
+{% endblock content %}

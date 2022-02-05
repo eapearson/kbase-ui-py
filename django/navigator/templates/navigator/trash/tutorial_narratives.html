@@ -1,0 +1,41 @@
+{% load nice_date %}
+<div class="NavigatorList">
+  {% for narrative in narratives.narratives %}
+  <div
+    class="
+      -item
+      {%
+      if
+      selected_narrative.id
+      ==
+      narrative.id
+      %}-selected{%
+      endif
+      %}
+    "
+    onclick="var ev = arguments[0]; if (ev.currentTarget !== ev.target && ev.target.tagName === 'A') {return true;}; window.location.href = '/navigator/tutorial/{{ narrative.id }}';"
+  >
+    <div>
+      <a
+        href="{{ settings.ui_base_url }}/narrative/{{ narrative.id }}"
+        target="_blank"
+        title="{{ narrative.title }}"
+      >
+        {{ narrative.title }}
+      </a>
+    </div>
+    <div>
+      <div style="font-style: italic; color: gray">
+        {{ narrative.modified_at|nice_date}} {% if narrative.created_at !=
+        narrative.modified_at %} (created {{ narrative.created_at|nice_date}})
+        {% endif %}
+      </div>
+      <div>
+        <a href="/user_profile/{{ narrative.owner }}" target="_blank"
+          >{{ narrative.owner}}</a
+        >
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>

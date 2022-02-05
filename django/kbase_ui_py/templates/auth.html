@@ -1,0 +1,67 @@
+{% if kbase.is_authenticated %}
+
+<div class="dropdown">
+  <button
+    id="kb-nav-menu"
+    class="btn btn-link dropdown-toggle"
+    type="button"
+    data-toggle="dropdown"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    <img
+      src="https://www.gravatar.com/avatar/{{ kbase.auth.user_profile.profile.synced.gravatarHash }}?s=300&amp;r=pg&d=identicon"
+      alt="User Avatar"
+      style="max-width: 40px"
+    />
+  </button>
+  <div
+    class="dropdown-menu dropdown-menu-right"
+    role="menu"
+    aria-labeledby="kb-nav-menu"
+  >
+    <div class="user-label">
+      <div class="realname">{{ kbase.auth.user_profile.user.realname }}</div>
+      <div class="username">{{ kbase.auth.user_profile.user.username }}</div>
+    </div>
+
+    <div role="presentation" class="dropdown-divider"></div>
+
+    <!-- a menu item -->
+    <a
+      class="dropdown-item"
+      href="/user_profile/{{ kbase.auth.user_profile.user.username }}"
+      }
+    >
+      <span class="far fa-user"></span>
+      <span>Your Profile</span>
+    </a>
+    <a class="dropdown-item" href="/account" }>
+      <span class="fas fa-id-badge"></span>
+      <span>Your Account</span>
+    </a>
+
+    <div role="presentation" class="dropdown-divider"></div>
+
+    <a class="dropdown-item" href="/auth/logout" }>
+      <span class="fas fa-sign-out-alt"></span>
+      <span>Sign Out</span>
+    </a>
+  </div>
+</div>
+
+{% else %} {% if path == '/auth/login' %}
+
+<a class="btn btn-primary disabled">
+  <span class="fas fa-sign-in-alt"></span><br />
+  <span>Sign In</span>
+</a>
+
+{% else %}
+
+<a class="btn btn-primary" href="/auth/login" }>
+  <span class="fas fa-sign-in-alt"></span><br />
+  <span>Sign In</span>
+</a>
+
+{% endif %} {% endif %}

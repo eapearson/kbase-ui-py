@@ -1,0 +1,58 @@
+{% extends "base.html" %} {% block content %}
+
+<h1>About KBase-UI-PY</h1>
+
+<div class="About OverflowFriendlyCol">
+  <div class="OverflowFriendlyRow">
+    <div class="OverflowFriendlyCol">
+      <p>Welcome to the KBase UI in Python!</p>
+      <p>
+        This is something of a thought experiment turned to life - what if
+        kbase-ui were implemented as a (mostly) server-side app?
+      </p>
+      <p>
+        Django top level functionality is organized into <i>apps</i>, which
+        closely align with kbase-ui <i>plugins</i>.
+      </p>
+      <p>
+        Some plugins have been partially rewritten as apps, initially to get a
+        feel for the process, to identify challenges, to come up with solutions,
+        to build out common functionality.
+      </p>
+    </div>
+    <div class="OverflowFriendlyCol">
+      <h2>Features</h2>
+      <ul>
+        <li>A django web app</li>
+        <li>Uses bootstrap and font-awesome</li>
+        <li>Develop in container, proxy to kbase services</li>
+      </ul>
+
+      <h2>Advantages</h2>
+      <ul>
+        <li>Python - common language across KBase</li>
+        <li>Server side service comm - faster, more reliable</li>
+        <li>Scalable - don't need to ship entire web app to each browser</li>
+        <li>Widely used framework - Django</li>
+        <li>
+          Global caching strategies - affect all users, no per-user cache warmup
+        </li>
+      </ul>
+
+      <h2>Challenges</h2>
+      <ul>
+        <li>Keep interactive!</li>
+        <li>Auto-updating ui</li>
+        <li>Shared caches</li>
+      </ul>
+
+      <h2>Status</h2>
+      <ul>
+        <li>Basic login / logout</li>
+        <li>Building first layer of existing web apps (plugins)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

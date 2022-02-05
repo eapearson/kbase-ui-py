@@ -1,0 +1,39 @@
+{% load nice_date %}
+<table class="table KB-DataTable">
+  <tbody>
+    <tr>
+      <th>Name</th>
+      <td>{{ module_name }}</td>
+    </tr>
+    <tr>
+      <th>Released?</th>
+      <td>{% if module_info.released %}Yes{% else %}No{% endif %}</td>
+    </tr>
+    <tr>
+      <th>Version</th>
+      <td>{{ module_info.ver }}</td>
+    </tr>
+    <tr>
+      <th>Created</th>
+      <td>{{ module_info.ver|nice_date }}</td>
+    </tr>
+    <tr>
+      <th>Owners</th>
+      <td>
+        {% for owner in module_info.owners %}
+        <div>
+          <a
+            href="{{ settings.ui_base_url }}/user_profile/{{ owner }}"
+            target="_blank"
+            >{{owner}}</a
+          >
+        </div>
+        {% endfor %}
+      </td>
+    </tr>
+    <tr>
+      <th>Description</th>
+      <td>{{ module_info.description }}</td>
+    </tr>
+  </tbody>
+</table>

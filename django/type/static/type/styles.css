@@ -1,0 +1,71 @@
+.KB-Type {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+}
+
+.KB-Type .-body {
+  flex: 1 1 0;
+  overflow-y: auto;
+}
+
+.KB-Type-Summary {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid rgba(200, 200, 200, 1);
+  border-radius: 8px;
+  padding: 8px;
+  margin-bottom: 1em;
+}
+
+.KB-Type-Summary > .-name {
+  font-weight: bold;
+}
+
+.KB-Type-Spec {
+  font-family: monospace;
+  white-space: pre;
+}
+
+.KB-Module {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+}
+
+.KB-Module .-body {
+  flex: 1 1 0;
+  overflow-y: auto;
+}
+
+.KB-Module-Summary {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid rgba(200, 200, 200, 1);
+  border-radius: 8px;
+  padding: 8px;
+  margin-bottom: 1em;
+}
+
+.KB-Module-Summary > .-name {
+  font-weight: bold;
+}
+
+.KB-LabeledField {
+  display: flex;
+  flex-direction: row;
+  margin: 0 1em;
+}
+
+.KB-LabeledField > .-label {
+  color: rgba(150, 150, 150, 1);
+  font-style: italic;
+  margin-right: 0.5em;
+}
+
+.KB-LabeledField > .-value {
+}

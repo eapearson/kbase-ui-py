@@ -1,0 +1,53 @@
+<div class="dropdown">
+  <button
+    id="kb-nav-menu"
+    class="btn btn-link dropdown-toggle"
+    type="button"
+    data-toggle="dropdown"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    <img src="/static/kbase_ui_py/kbase_logo.png" />
+  </button>
+  <div class="dropdown-menu" role="menu" aria-labeledby="kb-nav-menu">
+    <!-- a menu item -->
+    {% if kbase.is_authenticated %}
+    <a class="dropdown-item" href="/some/where.html" }>
+      <span class="far fa-file"></span>
+      <span>Narrative Interface</span>
+    </a>
+    <a class="dropdown-item" href="/some/where.html" }>
+      <span class="fas fa-plus"></span>
+      <span>New Narrative</span>
+    </a>
+    <a class="dropdown-item" href="/some/where.html" }>
+      <span class="fas fa-search"></span>
+      <span>JGI Search</span>
+    </a>
+    {% endif %}
+    <a class="dropdown-item" href="/biochem-search" }>
+      <span class="fas fa-search"></span>
+      <span>Biochem Search</span>
+    </a>
+    <!-- a divider -->
+    <div role="presentation" class="dropdown-divider"></div>
+    <a class="dropdown-item" href="/about/services" }>
+      <span class="fas fa-server"></span>
+      <span>KBase Service Status</span>
+    </a>
+    <!-- a divider -->
+    <div role="presentation" class="dropdown-divider"></div>
+    <a class="dropdown-item" href="/about" }>
+      <span class="fas fa-info-circle"></span>
+      <span>About</span>
+    </a>
+    <a class="dropdown-item" href="https://kbase.us/contact-us" target="_blank">
+      <span class="fas fa-envelope"></span>
+      <span>Contact KBase</span>
+    </a>
+    <a class="dropdown-item" href="https://kbase.us/narrative-guide" target="_blank"}>
+      <span class="fas fa-question"></span>
+      <span>Support</span>
+    </a>
+  </div>
+</div>

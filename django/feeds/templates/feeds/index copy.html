@@ -1,0 +1,48 @@
+{% extends "base.html" %} 
+
+{% block content %}
+
+<div class="KB-Col Feeds">
+  <div class="KB-Row">
+    <div class="KB-Col"></div>
+  </div>
+
+  <div class="KB-Row">
+    <div class="KB-Col" style="flex: 1 1 0">
+      {% for feed in feeds %}
+
+      <div class="Feed KB-Box {% if selected_feed.id == feed.id %}-selected{% endif %}" 
+           id="feed-{{ feed.id }}"
+           onclick="var ev = arguments[0]; if (ev.currentTarget !== ev.target && ev.target.tagName === 'A') {return true;}; window.location.href = '/feeds/{{ feed.id }}';"
+           >
+        <div class="-id">{{ feed.id }}</div>
+
+        <div class="-name">{{ feed.name }}</div>
+
+        <div class="-items">
+          {% for item in feed.feed %}
+
+          <div class="-item">{{ item }}</div>
+
+          {% endfor %}
+        </div>
+      </div>
+
+      {% endfor %}
+    </div>
+    <div class="KB-Col" style="flex: 3 1 0"></div>
+  </div>
+
+  
+</div>
+
+<script>
+    var selectedId = {% if selected_feed %}"{{ selected_feed.id }}"{% else %}null{% endif %}
+    var selectedElement = document.getElementById(`feed-${selectedId}`);
+    console.log('selected element?', selectedElement);
+    if (selectedElement) {
+      selectedElement.scrollIntoView({behavior: 'smooth', block: 'start'});
+    }
+</script>
+
+{% endblock content %}

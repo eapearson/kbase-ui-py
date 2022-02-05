@@ -1,0 +1,208 @@
+.Orgs-Index {
+  flex: 1 1 0px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.Orgs-Index .-header {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: yellow;
+}
+
+.Orgs-Index .-menu {
+  flex: 0 0 auto;
+  margin-top: 1em;
+}
+
+.Orgs-Index .-header .-stats {
+  margin-left: 1em;
+}
+
+.Orgs-Index .-body {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: row;
+  min-height: 0;
+}
+
+.Orgs-Index .-body .-list {
+  flex: 1 1 0;
+  /* display: flex;
+  flex-direction: column;
+  min-height: 0; */
+  overflow-y: auto;
+}
+
+.Orgs-Index .-body .-list .-item {
+  flex: 0 0 auto;
+  border: 1px solid rgba(200, 200, 200, 1);
+  border-radius: 8px;
+  padding: 4px;
+  margin: 10px 0;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  min-width: 0;
+}
+
+.Orgs-Index .-body .-list .-item .-logo {
+  flex: 0 0 64px;
+  margin-right: 8px;
+}
+
+.Orgs-Index .-body .-list .-item .-content {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.Orgs-Index .-body .-list .-item:hover {
+  background-color: rgba(200, 200, 200, 0.2);
+}
+
+.Orgs-Index .-body .-list .-item.-selected {
+  background-color: rgba(200, 200, 200, 0.2);
+}
+
+.Orgs-Index .-body .-list .-item:nth-child(1) {
+  margin-top: 0;
+}
+
+.Orgs-Index .-body .-list .-item:nth-last-child() {
+  margin-bottom: 0;
+}
+
+.Orgs-Index .-body .-detail {
+  flex: 2 1 0;
+  /* display: flex;
+  flex-direction: column; */
+  /* min-height: 0; */
+  margin-left: 10px;
+  border: 1px solid rgba(200, 200, 200, 0.5);
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 4px 4px 4px;
+  /* background-color: rgba(200, 200, 200, 0.2); */
+}
+
+/* Fields */
+
+/* List item */
+
+.Orgs-Index .-body .-list .-item .-name {
+  font-weight: bold;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.Orgs-Index .-body .-list .-item .-owner {
+}
+
+.Orgs-Index .-body .-list .-item .-members {
+  font-style: italic;
+}
+
+/* Detail item */
+
+.Orgs-Index .-body .-detail .-logo {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+
+  /* border: 1px dashed silver; */
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+  justify-content: center;
+}
+
+.Orgs-Index .-body .-detail .-name {
+  font-weight: bold;
+}
+
+.Orgs-Index .-body .-detail .-owner {
+}
+
+/* Members list */
+
+.Orgs-Index .-body .-detail .-members {
+  /* flex: 1 1 0px;
+  overflow-y: auto;
+  min-width: 0; */
+}
+
+.Orgs-Index .-body .-detail .-members .-name {
+  font-weight: bold;
+}
+
+/* Narrative list display */
+
+.Orgs-Index .-body .-detail .-narratives {
+  flex: 1 1 0px;
+  overflow-y: auto;
+  min-width: 0;
+}
+
+.Orgs-Index .-body .-detail .-narratives .-narrative {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.Orgs-Index .-body .-detail .-narratives .-narrative:nth-child(1) {
+  margin-top: 0;
+}
+
+.Orgs-Index .-body .-detail .-narratives .-narrative:nth-last-child() {
+  margin-bottom: 0;
+}
+
+.Orgs-Index .-body .-detail .-narratives > .-narrative .-title {
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.Orgs-Index .-body .-detail .-narratives > .-narrative .-public {
+  flex: 0 0 1em;
+}
+
+.Orgs-Index .-body .-detail .-narratives > .-narrative .-perm {
+  flex: 0 0 3em;
+}
+
+.Orgs-Index .-body .-detail .-researchinterests {
+  font-style: italic;
+}
+
+.Orgs-Index .-body .-detail .-description {
+  flex: 1 1 0;
+  overflow-y: auto;
+  background-color: rgba(200, 200, 200, 0.2);
+  border-radius: 4px;
+  padding: 10px;
+}
+
+/* App list display */
+.Orgs-Index .-body .-detail .-apps {
+  /* flex: 1 1 0px;
+  overflow-y: auto;
+  min-width: 0; */
+}
+
+.Orgs-Index .-body .-detail .-apps .-app {
+  min-width: 0;
+}
+
+.Orgs-Index .-body .-detail .-apps .-app .-name {
+  white-space: nowrap;
+  overflow-y: hidden;
+  text-overflow: ellipsis;
+}
+
+.Orgs-Index .-body .-detail .-apps .-app .-date-added {
+}

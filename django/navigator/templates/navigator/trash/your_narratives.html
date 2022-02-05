@@ -1,0 +1,49 @@
+{% load nice_elapsed_time %}
+<div class="NavigatorList">
+  {% for narrative in narratives.narratives %}
+  <div
+    class="
+      -item
+      {%
+      if
+      selected_narrative.id
+      ==
+      narrative.id
+      %}-selected{%
+      endif
+      %}
+    "
+    onclick="var ev = arguments[0]; if (ev.currentTarget !== ev.target && ev.target.tagName === 'A') {return true;}; window.location.href = '/navigator/yours/{{ narrative.id }}';"
+  >
+    <div style="display: flex; flex-direction: row">
+      <a
+        href="{{ settings.ui_base_url }}/narrative/{{ narrative.id }}"
+        target="_blank"
+        title="{{ narrative.title }}"
+        style="flex: 1 1 0"
+      >
+        {{ narrative.title }}
+      </a>
+      <div style="0 0 auto">
+        {% if narrative.is_public %}
+        <span class="fas fa-globe" />
+        {% else %}
+        <span class="fas fa-lock-open" />
+        {% endif %}
+      </div>
+    </div>
+    <div>
+      <div style="font-style: italic; color: gray">
+        {{ narrative.modified_at|nice_elapsed_time}} {% if narrative.created_at
+        != narrative.modified_at %} (created {{
+        narrative.created_at|nice_elapsed_time}}) {% endif %}
+      </div>
+      <div>
+        <a href="/user_profile/{{ narrative.owner }}" target="_blank"
+          >{{ narrative.owner}}</a
+        >
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>

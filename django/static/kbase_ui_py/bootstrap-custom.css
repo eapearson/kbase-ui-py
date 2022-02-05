@@ -1,0 +1,21 @@
+.table.table-no-border > thead > tr > th,
+.table.table-no-border > tbody > tr > th,
+.table.table-no-border > tfoot > tr > th,
+.table.table-no-border > thead > tr > td,
+.table.table-no-border > tbody > tr > td,
+.table.table-no-border > tfoot > tr > td {
+  border-top: none;
+  border-bottom: none;
+}
+
+.table.table-scrollable {
+  overflow-y: auto;
+  /* height: 20em; */
+}
+
+.table.table-scrollable thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: white;
+}

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'catalog/style.css' %}">
+
+{% include "./menu.html" %}
+
+
+<div style="flex: 1 1 0">
+    <table class="table table-lined table-hover table-scrollable">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Module
+                </th>
+                <th>
+                    Version
+                </th>
+                <th>
+                    Type
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for app in apps %}
+
+            <tr title="{{ app.tooltip }}">
+                <td>
+                    <a href="catalog/app/{{ app.id }}">{{ app.name }}</a>
+                    <div style="font-style: italic; color: gray;">
+                    {{ app.subtitle }}
+                    </div>
+                </td>
+                <td>
+                    <a href="catalog/module/{{ app.module_name }}">{{ app.module_name }}</a>
+                </td>
+                <td>
+                    {{ app.ver }}
+                </td>
+                <td>
+                    {{ app.app_type }}
+                </td>
+            </tr>
+            {% comment %} <tr>
+                <td style="font-style: italic; color: gray;" colspan="3">
+                    {{ app.subtitle }}
+                </td>
+            </tr> {% endcomment %}
+
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

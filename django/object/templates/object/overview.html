@@ -1,0 +1,119 @@
+{% extends "base.html" %} {% load static %} {% load nice_date %} {% block
+content %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'object/styles.css' %}"
+/>
+
+{% include "./partials/header.html" %}
+
+<div class="-menu">{% include "./partials/menu.html" %}</div>
+
+<h3>Object Info</h3>
+
+<table class="table KB-DataTable">
+  <tbody>
+    <tr>
+      <th>ID</th>
+      <td>{{ object_info.objid}}</td>
+    </tr>
+    <tr>
+      <th>Version</th>
+      <td>{{ object_info.version}}</td>
+    </tr>
+    <tr>
+      <th>Type</th>
+      <td>{{ object_info.type}}</td>
+    </tr>
+    <tr>
+      <th>Workspace ID</th>
+      <td>{{ object_info.wsid}}</td>
+    </tr>
+    <tr>
+      <th>Workspace Name</th>
+      <td>{{ object_info.workspace}}</td>
+    </tr>
+    <tr>
+      <th>Saved</th>
+      <td>{{ object_info.save_date}}</td>
+    </tr>
+    <tr>
+      <th>By</th>
+      <td>{{ object_info.saved_by}}</td>
+    </tr>
+    <tr>
+      <th>Metadata</th>
+      <td>
+        {% if object_info.metadata and object_info.metadata|length > 0 %}
+        <table class="table KB-DataTable">
+          <tbody>
+            {% for key, value in object_info.metadata.items %}
+            <tr>
+              <th>{{ key }}</th>
+              <td>{{ value }}</td>
+            </tr>
+
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <div>no metadata</div>
+        {% endif %}
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Workspace Info</h3>
+
+<table class="table KB-DataTable">
+  <tbody>
+    <tr>
+      <th>ID</th>
+      <td>{{ workspace_info.id}}</td>
+    </tr>
+    <tr>
+      <th>Name</th>
+      <td>{{ workspace_info.name}}</td>
+    </tr>
+    <tr>
+      <th>Owner</th>
+      <td>{{ workspace_info.owner}}</td>
+    </tr>
+    <tr>
+      <th>Last saved</th>
+      <td>{{ workspace_info.moddate}}</td>
+    </tr>
+    <tr>
+      <th>Permission</th>
+      <td>{{ workspace_info.user_permission}}</td>
+    </tr>
+    <tr>
+      <th>Public permission</th>
+      <td>{{ workspace_info.globalread}}</td>
+    </tr>
+    <tr>
+      <th>Metadata</th>
+      <td>
+        {% if workspace_info.metadata and workspace_info.metadata|length > 0 %}
+        <table class="table">
+          <tbody>
+            {% for key, value in workspace_info.metadata.items %}
+            <tr>
+              <th>{{ key }}</th>
+              <td>{{ value }}</td>
+            </tr>
+
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <div>no metadata</div>
+        {% endif %}
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+{% endblock content %}

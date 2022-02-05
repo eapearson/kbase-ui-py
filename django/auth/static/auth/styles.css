@@ -1,0 +1,107 @@
+.Login {
+    width: 40em;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.Login .-header {
+    display: flex;
+    flex-direction: column;
+}
+
+.Login .-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1em;
+}
+
+.Login .-header>.-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.Login .-header .-subtitle {
+    max-width: 25em;
+    font-style: italic;
+    font-weight: bold;
+    color: rgba(100, 100, 100, 1);
+    margin-top: 10px;
+    text-align: center;
+}
+
+.Login .-title {}
+
+.Login .-body .-col {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.Login .-body .-title-row {
+    text-align: center;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    margin-bottom: 1em;
+}
+
+.Login .-body .-body-row {
+    text-align: center;
+    margin-bottom: 0.5em;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* 
+.Login .-body .-button {
+    text-align: center;
+    margin: 4px;
+    padding: 4px;
+    position: relative;
+}
+
+.Login .-body .-button .-loading {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding-top: 4px;
+    pointer-events: none;
+    display: none;
+} */
+
+.Login .Login-button {
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+.Login .Login-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.Login .Login-button img {
+    border-radius: 0.25rem;
+    filter: grayscale(50%);
+}
+
+.Login .Login-button:hover img {
+    filter: none;
+}
+
+.Login form {
+    margin: 0;
+}

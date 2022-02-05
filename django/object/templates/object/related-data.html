@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% load nice_date %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'object/styles.css' %}" />
+
+{% include "./partials/header.html" %}
+
+<div class="-menu">
+    {% include "./partials/menu.html" %}
+</div>
+
+<p>Related Samples</p>
+
+{% endblock content %}

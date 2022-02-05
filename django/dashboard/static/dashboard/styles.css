@@ -1,0 +1,7 @@
+table.table.KB-NarrativesTable > tbody > tr > td {
+  white-space: nowrap;
+  min-width: 0;
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

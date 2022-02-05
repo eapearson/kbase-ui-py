@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% block content %} {% load static %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'navigator/styles.css' %}"
+/>
+
+{% include "./menu.html" %}
+
+<div class="Navigator OverflowFriendlyCol">
+  <div class="OverflowFriendlyRow">
+    <div class="OverflowFriendlyCol">
+      <p>Welcome to the Narratives Navigator!</p>
+      <p>
+        The home page can provide insight into the world of Narratives, a bit of
+        a Narratives dashboard.
+      </p>
+      <p>
+        For instance - all Narratives added or updated since your last visit,
+        narrative update history, etc.
+      </p>
+    </div>
+    <div class="OverflowFriendlyCol"></div>
+  </div>
+</div>
+
+{% endblock content %}

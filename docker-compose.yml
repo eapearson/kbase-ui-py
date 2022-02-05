@@ -1,0 +1,37 @@
+version: "3"
+networks:
+  kbase-dev:
+    external:
+      name: kbase-dev
+services:
+  kbase-ui-py:
+    build:
+      context: .
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "8000:8000"
+    dns: 8.8.8.8
+    networks:
+      - kbase-dev
+    env_file: ./tools/proxy/conf/${ENV}.env
+    # environment:
+    #   - KBASE_SERVICE_HOSTNAME=${KBASE_SERVICE_HOSTNAME}
+    #   - KBASE_UI_HOSTNAME=${KBASE_UI_HOSTNAME}
+    command: python manage.py runserver 0.0.0.0:8000
+  proxy:
+    depends_on:
+      # nginx depends on upstream resources being active when
+      # it starts up; we actually have a circular dependency.
+      - kbase-ui-py
+    build:
+      context: ./tools/proxy
+    networks:
+      - kbase-dev
+    # container_name: kbase-ui-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    dns: 8.8.8.8
+    # note that this is really a docker env file and is relative to the docker-compose file
+    env_file: ./tools/proxy/conf/${ENV}.env

@@ -1,0 +1,27 @@
+{% load epoch_to_datetime %}
+{% if selected_group.members|length == 0 %}
+    {% if selected_group.hidden_member_count > 0 %}
+        <div class="KB-MissingData">no viewable members :(</div>
+        <div class="KB-MissingData">{{ selected_group.hidden_member_count }} private members</div>
+    {% else %}
+        <div class="KB-MissingData">no members :(</div>
+    {% endif %}
+{% else %}
+    {% for member in selected_group.members %}
+    <div class="KB-Box -member">
+        <div class="KB-Row">
+        <div class="KB-Col -name">
+            <a href="/user_profile/{{ member.name}}" target="_blank">{{ member.name }}</a>
+        </div>
+        </div>
+        <div class="KB-Row">
+        <div class="KB-Col -joined">
+            <div class="-date-added">joined {% if member.joined %}{{ member.joined|epoch_to_datetime|date:"M j, Y" }}{% else %}n/a{% endif %}</div>
+        </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% if selected_group.hidden_member_count > 0 %}
+        <div class="KB-MissingData">and {{ selected_group.hidden_member_count }} private members</div>
+    {% endif %}
+{% endif %}

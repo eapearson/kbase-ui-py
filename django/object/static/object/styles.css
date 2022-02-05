@@ -1,0 +1,43 @@
+.Object-summary {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid rgba(200, 200, 200, 0.5);
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.Object-summary .-icon {
+  flex: 0 0 auto;
+}
+
+.Object-summary .-title-area {
+  flex: 1 1 0;
+}
+
+.Object-summary .-title-area .-title {
+  font-size: 120%;
+  font-weight: bold;
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.Object-summary .-title-area .-subtitle {
+  font-style: italic;
+}
+
+.Object-summary .-save-info {
+  flex: 0 0 auto;
+  margin-right: 1em;
+  /* overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; */
+}
+
+.Object-summary .-buttons {
+  flex: 0 0 auto;
+
+  /* overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; */
+}

@@ -1,0 +1,37 @@
+{% load nice_elapsed_time %}
+
+<h3>Your Narratives ({{ your_narratives.total_count}})</h3>
+
+<div style="max-height: 20em; overflow-y: auto">
+  <table
+    class="table table-sm table-no-border table-hover table-scrollable KB-NarrativesTable"
+    style="width: 100%"
+  >
+    <thead>
+      <th style="width: 50%">Title</th>
+      <th style="width: 12em">Last Saved</th>
+      <th style="width: 12em">Created</th>
+      <th style="width: 5em">Cells</th>
+      <th style="width: 5em">Objects</th>
+    </thead>
+    <tbody>
+      {% for narrative in your_narratives.narratives %}
+      <tr>
+        <td>
+          <a
+            href="{{ settings.ui_base_url }}/narrative/{{ narrative.id }}"
+            target="_blank"
+            title="{{ narrative.title }}"
+          >
+            {{ narrative.title }}
+          </a>
+        </td>
+        <td>{{ narrative.modified_at|nice_elapsed_time}}</td>
+        <td>{{ narrative.created_at|nice_elapsed_time}}</td>
+        <td>{{ narrative.cell_count }}</td>
+        <td>{{ narrative.object_count }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

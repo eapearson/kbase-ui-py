@@ -1,0 +1,19 @@
+{% load epoch_to_datetime %}
+{% if selected_group.resources.workspace|length == 0 %}
+    <div class="KB-MissingData">no narratives :(</div>
+{% else %}
+    {% for narrative in selected_group.resources.workspace %}
+        <div class="-narrative KB-Box">
+        <div class="KB-Row">
+            <div class="KB-Col">
+            <div class="-title"><a href="{{ settings.service_base_url }}/narrative/{{ narrative.rid }}" target="_blank">{{ narrative.narrname }}</a></div>
+            </div>
+        </div>
+        <div class="KB-Row">
+            <div class="-date-added">added {% if narrative.added %}{{ narrative.added|epoch_to_datetime|date:"M j, Y" }}{% else %}n/a{% endif %}</div>
+            {% comment %} <div class="KB-Col"><div class="-public">{% if narrative.public %}*{% else %}-{% endif %}</div></div>
+            <div class="KB-Col"><div class="-perm">{{ narrative.perm }}</div></div> {% endcomment %}
+        </div>
+        </div>
+    {% endfor %}
+{% endif %}

@@ -1,0 +1,18 @@
+{% load if_starts_with %} {% load if_matches %}
+<div class="Menu">
+  <div class="-item {% if tab == 'home' %}-active{% endif %}">
+    <a href="/type/{{type_info.type_def}}">Overview</a>
+  </div>
+  <div class="-item {% if tab == 'spec' %}-active{% endif %}">
+    <a href="/type/{{type_info.type_def}}/spec">Type Spec</a>
+  </div>
+  <div class="-item {% if tab == 'types-using' %}-active{% endif %}">
+    <a href="/type/{{type_info.type_def}}/types-using">Types Using</a>
+  </div>
+  <div class="-item {% if tab == 'types-used' %}-active{% endif %}">
+    <a href="/type/{{type_info.type_def}}/types-used">Types Used</a>
+  </div>
+  <div class="-item {% if tab == 'versions' %}-active{% endif %}">
+    <a href="/type/{{type_info.type_def}}/versions">Versions</a>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+{% load if_starts_with %} {% load if_matches %}
+<div class="Menu">
+  <div class="-item {% if tab == 'home' %}-active{% endif %}">
+    <a href="/type/module/{{module_name}}/{{module_info.ver}}">Overview</a>
+  </div>
+  <div class="-item {% if tab == 'spec' %}-active{% endif %}">
+    <a href="/type/module/{{module_name}}/{{module_info.ver}}/spec">Spec</a>
+  </div>
+  <div class="-item {% if tab == 'types' %}-active{% endif %}">
+    <a href="/type/module/{{module_name}}/{{module_info.ver}}/types">Types</a>
+  </div>
+  <div class="-item {% if tab == 'included-modules' %}-active{% endif %}">
+    <a href="/type/module/{{module_name}}/{{module_info.ver}}/included-modules"
+      >Included modules</a
+    >
+  </div>
+  <div class="-item {% if tab == 'versions' %}-active{% endif %}">
+    <a href="/type/module/{{module_name}}/{{module_info.ver}}/versions"
+      >Versions</a
+    >
+  </div>
+</div>

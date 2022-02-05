@@ -1,0 +1,23 @@
+{% load if_starts_with %}
+<div class="Menu">
+  <div class="-item {% if tab == 'index' %}-active{% endif %}">
+    <a href="/orgs?query={{query}}"
+      >All ({{ totals.filtered.all }} / {{ totals.all }})</a
+    >
+  </div>
+  <div class="-item {% if tab == 'own' %}-active{% endif %}">
+    <a href="/orgs/own?query={{query}}"
+      >Your Organizations ({{ totals.filtered.own }} / {{ totals.own }})</a
+    >
+  </div>
+  <div class="-item {% if tab == 'member' %}-active{% endif %}">
+    <a href="/orgs/member?query={{query}}"
+      >Organizations you belong to ({{ totals.filtered.member }} / {{ totals.member }})</a
+    >
+  </div>
+  <div class="-item {% if tab == 'public' %}-active{% endif %}">
+    <a href="/orgs/public?query={{query}}"
+      >Public ({{ totals.filtered.public }} / {{ totals.public }})</a
+    >
+  </div>
+</div>

@@ -1,0 +1,129 @@
+{% extends "base.html" %} 
+
+{% load markdownify %} 
+{% load static %} 
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'orgs/styles.css' %}" />
+
+<div class="Orgs-Index">
+  <div class="-header">
+  
+    <form action="{{ settings.service_base_url }}/orgs/{{ selected_group.id }}" method="GET">
+      <input type="search" class="form-control" placeholder="Search Organizations..." name="query" value="{{ params.query }}" onsearch="var ev=arguments[0]; ev.target.parentNode.submit();" />
+    </form>
+
+    <div class="-stats">
+    Showing {% if total_count > groups|length %}{{ groups|length }} of {{ total_count }}{% else %}all {{ total_count }}{% endif %} Organizations
+    </div>
+  
+  </div>
+
+  <div class="-menu">
+    {% include "./partials/menu.html" %}
+  </div>
+
+  <div class="KB-Row -body">
+    <div class="KB-Col -list">
+      {% if groups|length == 0 %}
+        <div class="KB-MissingData">no Organizations found :(</div> 
+      {% else %}
+        {% for group in groups %}
+
+          <div
+            class="-item {% if selected_group.id == group.id %}-selected{% endif %}"
+            id="group-{{ group.id }}"
+            onclick="var ev = arguments[0]; if (ev.currentTarget !== ev.target && ev.target.tagName === 'A') {return true;}; window.location.href = '/orgs/{{ group.id }}?query={{ params.query }}';"
+          >
+            <div class="-logo">
+              {% if group.custom.logourl %}
+              <img src="{{ group.custom.logourl }}" style="width: 64px" />
+              {% else %}
+                <span class="far fa-file-image" style="font-size: 64px; color: rgba(200, 200, 200, 0.5);" />
+              {% endif %}
+            </div>
+            <div class="-content">
+              <div class="-name" title="{{ group.name }}">{{ group.name }}</div>
+              <div class="-owner">
+                <a href="/user_profile/{{ group.owner }}" target="_blank"
+                  >{{ group.owner }}</a
+                >
+              </div>
+              <div class="-created">est. {{ group.createdate|date:"M j, Y" }}</div>
+              <div class="-members">
+                {{ group.member_count }} member{% if group.member_count != 1%}s{% endif %}
+              </div>
+            </div>
+          </div>
+
+        {% endfor %}
+      {% endif %}
+      
+    </div>
+    <script>
+      var selectedId = {% if selected_group %}"{{ selected_group.id }}"{% else %}null{% endif %}
+      var selectedElement = document.getElementById(`group-${selectedId}`);
+      if (selectedElement) {
+        selectedElement.scrollIntoView({behavior: 'smooth', block: 'start'});
+      }
+    </script>
+
+    <div class="KB-Col -detail">
+      <div class="KB-Row">
+        <div class="KB-Col" style="flex: 0 0 200px; margin-right: 10px;">
+          <div class="-logo">
+            {% if selected_group.custom.logourl %}
+            <img
+              src="{{ selected_group.custom.logourl }}"
+              style="width: 200px"
+            />
+            {% else %}
+            <span class="far fa-file-image" style="font-size: 200px; color: rgba(200, 200, 200, 0.3);" />
+            {% endif %}
+          </div>
+        </div>
+        <div class="KB-Col">
+          <div class="-name">{{ selected_group.name}}</div>
+
+          <div class="-researchinterests">
+            {{ selected_group.custom.researchinterests}}
+          </div>
+
+          <div class="-description">
+            {{ selected_group.custom.description|markdownify}}
+          </div>
+        </div>
+      </div>
+
+      <div class="KB-Row -fullheight">
+        <div class="KB-Col">
+          <div class="-title">
+            Members
+          </div>
+          <div class="-members">
+            {% include "./partials/members.html" %}
+          </div>
+        </div>
+        <div class="KB-Col">
+          <div class="-title">
+            Narratives
+          </div>
+          <div class="-narratives">
+            {% include "./partials/narratives.html" %}
+          </div>
+        </div>
+        <div class="KB-Col">
+          <div class="-title">
+            Apps
+          </div>
+          <div class="-apps">
+            {% include "./partials/apps.html" %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

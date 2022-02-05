@@ -1,0 +1,156 @@
+{% extends "base.html" %} 
+{% load nice_elapsed_time %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'feeds/styles.css' %}" />
+<div class="KB-Col Feeds">
+  <div class="KB-Row">
+    <div class="KB-Col"></div>
+  </div>
+
+  <div class="KB-Row">
+    <div class="KB-Col" style="flex: 1 1 0">
+      {% if notifications|length == 0 %}
+        <div class="alert alert-warning">
+          <p>No Unread Notifications</p>
+          <p>You may wish to <a href="{{ settings.ui_base_url }}/feeds?show_read=t">view older notifications</a><p>
+        </div>
+      {% else %}
+        {% for item in notifications %}
+        <div class="Feed KB-Box {% if selected_notification.notification.id == item.notification.id %}-selected{% endif %}" 
+            id="notification-{{ item.notification.id }}"
+            onclick="var ev = arguments[0]; console.log('hmm', ev.target.tagName); if (ev.currentTarget !== ev.target && ev.target.tagName === 'A') {console.log('link clicked'); return true;}; window.location.href = '/feeds/{{ item.notification.id }}';"
+            >
+          {% if item.type == 'system_message' %}
+            <p>{{ item.message }}</p>
+          {% else %}
+            <div>
+              <div style="font-weight: bold;">{{ item.notification.level }}</div>
+              <div class="-actor" style="font-weight: bold;">{{ item.notification.actor.name }} ({{ item.notification.actor.type}} {{ item.notification.actor.id }})</div>
+              <div>
+                <span style="text-style: underline;">{{ item.notification.verb }}</span>
+              </div>
+              <div><a href="{{item.object_url}}" target="_blank">{{ item.notification.object.name}} ({{ item.notification.object.type}}:{{ item.notification.object.id}})</a></div>
+              <div>
+                <span style="font-weight: bold;">{{ item.action }}</span>
+              </div>
+              <div class="-target">{{ item.target.name }} ({{ item.target.type}} {{ item.target.id }})</div>
+
+              {% comment %} <i>for</i>  {% endcomment %}
+            </div>
+          {% endif %}
+          <div>
+            {{ item.notification.created|nice_elapsed_time}}
+          </div>
+        </div>
+
+        {% endfor %}
+      {% endif %}
+    </div>
+    <div class="KB-Col" style="flex: 1 1 0">
+      {% if selected_notification %}
+      <div class="KB-Well">
+        <div class="KB-Properties">
+            <div class="-property">
+              <div class="-label">Level</div>
+              <div class="-value">{{ selected_notification.notification.level }}</div>
+            </div>
+            <div class="-property">
+              <div class="-label">Created</div>
+              <div class="-value">{{ selected_notification.notification.created|nice_elapsed_time}}</div>
+            </div>
+            <div class="-property">   
+              <div class="-label">Verb</div>
+              <div class="-value">{{ selected_notification.notification.verb}}</div>
+            </div>
+            <div class="-property">   
+              <div class="-label">Action</div>
+              <div class="-value">{{ selected_notification.action}}</div>
+            </div>
+            <div class="-property">   
+              <div class="-label">Message</div>
+              <div class="-value">{{ selected_notification.message}}</div>
+            </div>
+
+            <div class="-divider">
+              <div>Actor</div>
+            </div>
+            <div class="-property">
+              <div class="-label">Name</div>
+              <div class="-value">{{ selected_notification.notification.actor.name }}</div>
+            </div>
+            <div class="-property">
+              <div class="-label">Type</div>
+              <div class="-value">{{ selected_notification.notification.actor.type }}</div>
+            </div>
+           <div class="-property">
+              <div class="-label">ID</div>
+              <div class="-value">{{ selected_notification.notification.actor.id }}</div>
+            </div>
+
+            <div class="-property">
+              <div class="-label">Action</div>
+              <div class="-value">{{ selected_notification.notification.verb }}</div>
+            </div>
+
+            <div class="-divider">
+              <div>Object</div>
+            </div>
+            <div class="-property">
+              <div class="-label">Name</div>
+              <div class="-value"><a href="{{item.object_url}}" target="_blank">{{ selected_notification.notification.object.name}} ({{ selected_notification.notification.object.type}}:{{ selected_notification.notification.object.id}})</a></div>
+            </div>
+            <div class="-property">
+              <div class="-label">Type</div>
+              <div class="-value">{{ selected_notification.notification.object.type }}</div>
+            </div>
+           <div class="-property">
+              <div class="-label">ID</div>
+              <div class="-value">{{ selected_notification.notification.object.id }}</div>
+            </div>
+
+            <div class="-divider">
+              <div>Target</div>
+            </div>
+            <div class="-property">
+              <div class="-label">Name</div>
+              <div class="-value">{{ selected_notification.target.name}} ({{ selected_notification.target.type}}:{{ selected_notification.target.id}})</div>
+            </div>
+            <div class="-property">
+              <div class="-label">Type</div>
+              <div class="-value">{{ selected_notification.target.type }}</div>
+            </div>
+           <div class="-property">
+              <div class="-label">ID</div>
+              <div class="-value">{{ selected_notification.target.id }}</div>
+            </div>
+
+          <div class="-divider">
+              <div>Context</div>
+            </div>
+            <div class="-property">
+              <div class="-label">Link</div>
+              <div class="-value">{{ selected_notification.notification.context.link }}</div>
+            </div>
+           <div class="-property">
+              <div class="-label">Text</div>
+              <div class="-value">{{ selected_notification.notification.context.text }}</div>
+            </div>
+        </table>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+    var selectedId = {% if selected_notification %}"{{ selected_notification.id }}"{% else %}null{% endif %}
+    var selectedElement = document.getElementById(`notifification-${selectedId}`);
+    console.log('selected element?', selectedElement);
+    if (selectedElement) {
+      selectedElement.scrollIntoView({behavior: 'smooth', block: 'start'});
+    }
+</script>
+
+{% endblock content %}

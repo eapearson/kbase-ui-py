@@ -1,0 +1,19 @@
+NOW:
+
+1. Add base url for app to `kbase_ui_py/urls.py`
+
+   ```python
+   path('MYAPP/', include('MYAPP.urls')),
+   ```
+
+2. Add to `settings.py`
+
+   Add an entry to `INSTALLED_APPS`:
+
+   ```python
+   'MYAPP.apps.MyappConfig',
+   ```
+
+   This matches the file `MYAPP/apps.py` inside of which you'll find a class generated `MyappConfig`, where `Myapp` is the proper-cased version of the app name.
+
+Then you are done! 
