@@ -18,7 +18,7 @@ services:
     # environment:
     #   - KBASE_SERVICE_HOSTNAME=${KBASE_SERVICE_HOSTNAME}
     #   - KBASE_UI_HOSTNAME=${KBASE_UI_HOSTNAME}
-    command: python manage.py runserver 0.0.0.0:8000
+    command: pypy manage.py runserver 0.0.0.0:8000
   proxy:
     depends_on:
       # nginx depends on upstream resources being active when

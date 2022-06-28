@@ -1,0 +1,3 @@
+switch to poetry
+add apps:
+    ...
